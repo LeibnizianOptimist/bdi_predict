@@ -14,6 +14,7 @@ tensorflow-estimator==2.10.0
 tensorflow-macos==2.8.0
 tensorflow-metadata==1.10.0
 seaborn
+notebook
 
 # tests/linter
 black
