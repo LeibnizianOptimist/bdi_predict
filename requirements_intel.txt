@@ -30,6 +30,10 @@ google-cloud-storage
 mlflow
 s3fs
 
+fastapi
+pytz            
+uvicorn 
+
 # utilities
 six>=1.14
 joblib
