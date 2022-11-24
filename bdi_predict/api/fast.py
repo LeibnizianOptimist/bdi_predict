@@ -23,7 +23,8 @@ app.add_middleware(
 
 
 @app.get("/predict")
-def predict(X):      # 1
+def predict(X): 
+    # 1
     """
     we use type hinting to indicate the data types expected
     for the parameters of the function
@@ -33,7 +34,8 @@ def predict(X):      # 1
     without type hinting we need to manually convert
     the parameters of the functions which are all received as strings
     """
-    ## HOW TO IMPEMENT HTIS FOR UNIVARIATE VALUES?
+    ## HOW TO IMPEMENT HTIS FOR UNIVARIATE VALUES? list containing a list: 
+    
     
     model = app.state.model
     
