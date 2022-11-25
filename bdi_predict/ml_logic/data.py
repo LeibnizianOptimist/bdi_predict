@@ -1,9 +1,3 @@
-from taxifare.ml_logic.params import (COLUMN_NAMES_RAW,
-                                            DTYPES_RAW_OPTIMIZED,
-                                            DTYPES_RAW_OPTIMIZED_HEADLESS,
-                                            DTYPES_PROCESSED_OPTIMIZED
-                                            )
-
 import os
 import pandas as pd
 
@@ -21,8 +15,7 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
 
     # RENAME COLUMNS
     df.rename(columns={"BDI_Price":"bdi",
-                       "CSTEEL_Price":"CSTEEL",
-                       ""
+                       "CSTEEL_Price":"CSTEEL"
                        })
     
     print("\ndata cleaned")

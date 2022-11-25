@@ -1,10 +1,9 @@
-from datetime import datetime
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
+import numpy as np
 from bdi_predict.ml_logic.registry import load_model
-from bdi_predict.ml_logic.preprocessor import preprocess_features
-from bdi_predict.main.main import pred
+from bdi_predict.ml_logic.params import LOCAL_REGISTRY_PATH
 from datetime import datetime
 import pytz
 
@@ -21,37 +20,38 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-
 @app.get("/predict")
-def predict(X): 
-    # 1
+def predict(X1:float,
+            X2:float,
+            X3:float,
+            X4:float,
+            X5:float,
+            X6:float,
+            X7:float
+):
     """
-    we use type hinting to indicate the data types expected
-    for the parameters of the function
-    FastAPI uses this information in order to hand errors
-    to the developpers providing incompatible parameters
-    FastAPI also provides variables of the expected data type to use
-    without type hinting we need to manually convert
-    the parameters of the functions which are all received as strings
+    Type hniting is used to indicate the datatypes expected for the parameters of the functino 
+    FastAPI uses this info in order to hand errors to the developpers providing incompatible parameters.
+    FastAPI also provides variables of the expected datatype to use without type hinting we need to manually convert the 
+    parameters of the functions which are all recieved as strings.
     """
-    ## HOW TO IMPEMENT HTIS FOR UNIVARIATE VALUES? list containing a list: 
     
+    X = [X1, X2, X3, X4, X5, X6, X7]
+    X_pred = pd.DataFrame(X) 
+    assert X_pred.shape == (7, 1)
     
     model = app.state.model
     
-    X_processed = preprocess_features(X)
-    
-    y_pred = model.predict(X_processed)
-    
-    y_pred = float(y_pred)
+    y_pred = model.predict(X_pred)
+    y_pred = float(y_pred[0])
     
     return {
-    'BDI predition value': y_pred
-}
+        "BDI PREDICTION VALUE": y_pred
+    }
 
 
 @app.get("/")
 def root():
     return {
-    'greeting': 'Welcome the BDI prediction interface.'
+    'greetings': 'Welcome the BDI prediction interface.'
 }

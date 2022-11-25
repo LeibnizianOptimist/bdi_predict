@@ -3,6 +3,10 @@ import os
 import time
 import pickle
 from tensorflow.keras import Model, models
+import glob
+
+
+from bdi_predict.ml_logic.params import LOCAL_REGISTRY_PATH
 
 
 def save_model(model: Model = None,
@@ -58,6 +62,6 @@ def load_model(save_copy_locally=False) -> Model:
     print(f"- path: {model_path}")
 
     model = models.load_model(model_path)
-    print("\nmodel loaded from disk")
+    print("\nModel loaded from disk")
 
     return model
