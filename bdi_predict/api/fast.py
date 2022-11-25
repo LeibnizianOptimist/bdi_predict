@@ -35,13 +35,13 @@ def predict(X1:float,
     FastAPI also provides variables of the expected datatype to use without type hinting we need to manually convert the 
     parameters of the functions which are all recieved as strings.
     """
+    
     X = [X1, X2, X3, X4, X5, X6, X7]
-    print(X)
     X_pred = pd.DataFrame(X) 
-  
     assert X_pred.shape == (7, 1)
     
     model = app.state.model
+    
     y_pred = model.predict(X_pred)
     y_pred = float(y_pred[0])
     

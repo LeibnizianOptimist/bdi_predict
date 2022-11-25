@@ -62,6 +62,6 @@ def load_model(save_copy_locally=False) -> Model:
     print(f"- path: {model_path}")
 
     model = models.load_model(model_path)
-    print("\nModel loaded from disk.")
+    print("\nModel loaded from disk")
 
     return model
