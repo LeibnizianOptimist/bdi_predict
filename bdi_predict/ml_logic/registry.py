@@ -55,7 +55,7 @@ def load_model(save_copy_locally=False) -> Model:
     model_directory = os.path.join(LOCAL_REGISTRY_PATH, "models")
 
     results = glob.glob(f"{model_directory}/*")
-    if not results:
+    if len(results) == 0:
         return None
 
     model_path = sorted(results)[-1]

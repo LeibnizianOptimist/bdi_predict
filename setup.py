@@ -9,9 +9,9 @@ setup(name='bdi_predict',
       version="1.0",
       description="Project Description",
       packages=find_packages(),
-      install_requires=requirements,
+      # install_requires=requirements,
       test_suite='tests',
       # include_package_data: to install data from MANIFEST.in
       include_package_data=True,
-      scripts=['scripts/bdi_predict-run'],
+      # scripts=['scripts/bdi_predict-run'],
       zip_safe=False)
