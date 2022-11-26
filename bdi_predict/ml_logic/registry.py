@@ -4,6 +4,7 @@ import time
 import pickle
 from tensorflow.keras import Model, models
 import glob
+import mlflow
 
 
 from bdi_predict.ml_logic.params import LOCAL_REGISTRY_PATH
@@ -25,7 +26,6 @@ def save_model(model: Model = None,
             mlflow_experiment = os.environ.get("MLFLOW_EXPERIMENT")
             mlflow_model_name = os.environ.get("MLFLOW_MODEL_NAME")
             
-
             # configure mlflow
             mlflow.set_tracking_uri(mlflow_tracking_uri)
             mlflow.set_experiment(experiment_name=mlflow_experiment)
