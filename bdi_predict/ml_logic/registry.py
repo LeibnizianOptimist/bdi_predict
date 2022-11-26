@@ -18,7 +18,50 @@ def save_model(model: Model = None,
 
     timestamp = time.strftime("%Y%m%d-%H%M%S")
 
-    print("\nSave model to local disk...")
+    if os.environ.get("MODEL_TARGET") == "mlflow":
+
+            # retrieve mlflow env params
+            mlflow_tracking_uri = os.environ.get("MLFLOW_TRACKING_URI")
+            mlflow_experiment = os.environ.get("MLFLOW_EXPERIMENT")
+            mlflow_model_name = os.environ.get("MLFLOW_MODEL_NAME")
+            
+
+            # configure mlflow
+            mlflow.set_tracking_uri(mlflow_tracking_uri)
+            mlflow.set_experiment(experiment_name=mlflow_experiment)
+            
+
+            with mlflow.start_run():
+
+                # STEP 1: push parameters to mlflow
+                
+                if params is not None:
+                    mlflow.log_params(params)
+                
+
+                # STEP 2: push metrics to mlflow
+                
+                if metrics is not None:
+                    mlflow.log_metrics(metrics)
+                
+
+                # STEP 3: push model to mlflow
+                
+                if model is not None:
+
+                    mlflow.keras.log_model(keras_model=model,
+                                        artifact_path="model",
+                                        keras_module="tensorflow.keras",
+                                        registered_model_name=mlflow_model_name)
+                
+        
+            print("data saved to mlflow")
+           
+            return None
+
+
+
+    print("\nSaving model to local disk...")
 
     # save params
     if params is not None:
