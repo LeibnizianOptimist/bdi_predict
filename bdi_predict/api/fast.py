@@ -27,7 +27,10 @@ def predict(X1:float,
             X4:float,
             X5:float,
             X6:float,
-            X7:float
+            X7:float,
+            X8:float,
+            X9:float,
+            X10:float
 ):
     """
     Type hniting is used to indicate the datatypes expected for the parameters of the functino 
@@ -36,17 +39,34 @@ def predict(X1:float,
     parameters of the functions which are all recieved as strings.
     """
     
-    X = [X1, X2, X3, X4, X5, X6, X7]
-    X_pred = pd.DataFrame(X) 
-    assert X_pred.shape == (7, 1)
+    X = [X1, X2, X3, X4, X5, X6, X7, X8, X9, X10]
+    X_pred = np.array(X) 
+    X_pred = X_pred.reshape(10, 1)
+    assert X_pred.shape == (10, 1)
     
     model = app.state.model
     
-    y_pred = model.predict(X_pred)
-    y_pred = float(y_pred[0])
+    
+    #The returned value of the model is the log difference between the previous input value and the next value (y_pred). We must utilise
+    #We must utlise this predicted value to obtain a more useful number, an aboslute value of the index tomorrow, given the model. 
+    
+    y_pred_log_diff_100 = model.predict(X_pred)
+    y_pred_log_diff_100 = float(y_pred_log_diff_100[0])
+    
+    #RECONVERSION TO THE LOG DIFFERENCE, y_pred_log_diff
+    y_pred_log_diff = y_pred_log_diff_100/100
+    
+    
+    #WORKING OUT COMMON LOG Y PRED, y_pred_log
+    X10_log10 = np.log10(X10)
+    y_pred_log = y_pred_log_diff + X10_log10
+    
+    #CONVERTING COMMON LOG y_pred_log to y_pred
+    y_pred = 10**y_pred_log
+    
     
     return {
-        "BDI PREDICTION VALUE": y_pred
+        "BDI PREDICTION 1 WEEK INTO THE FUTRE": y_pred
     }
 
 
