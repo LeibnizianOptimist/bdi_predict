@@ -46,7 +46,6 @@ def predict(X1:float,
     
     model = app.state.model
     
-    
     #The returned value of the model is the log difference between the previous input value and the next value (y_pred). We must utilise
     #We must utlise this predicted value to obtain a more useful number, an aboslute value of the index tomorrow, given the model. 
     

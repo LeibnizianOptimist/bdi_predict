@@ -39,6 +39,3 @@
 
 - Obtain obscure proprietary data used as features within academic papers - getting better model performance seems to require this!  
 
-- 
-
-

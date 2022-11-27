@@ -39,6 +39,10 @@ class WindowGenerator():
         f'Label indices: {self.label_indices}',
         f'Label column name(s): {self.label_columns}'])
 
+
+
+
+
 class Sequential:
 
     def __init__(self, data):
