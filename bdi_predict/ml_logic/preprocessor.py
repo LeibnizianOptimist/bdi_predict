@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from tensorflow.keras.preprocessing.sequence import TimeseriesGenerator
 from sklearn.preprocessing import MinMaxScaler
 
