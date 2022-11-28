@@ -49,12 +49,8 @@ def predict(X1:float,
     #The returned value of the model is the log difference between the previous input value and the next value (y_pred). We must utilise
     #We must utlise this predicted value to obtain a more useful number, an aboslute value of the index tomorrow, given the model. 
     
-    y_pred_log_diff_100 = model.predict(X_pred)
-    y_pred_log_diff_100 = float(y_pred_log_diff_100[0])
-    
-    #RECONVERSION TO THE LOG DIFFERENCE, y_pred_log_diff
-    y_pred_log_diff = y_pred_log_diff_100/100
-    
+    y_pred_log_diff = model.predict(X_pred)
+    y_pred_log_diff = float(y_pred_log_diff[0])
     
     #WORKING OUT COMMON LOG Y PRED, y_pred_log
     X10_log10 = np.log10(X10)
