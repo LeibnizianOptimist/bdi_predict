@@ -41,8 +41,8 @@ def predict(X1:float,
     
     X = [X1, X2, X3, X4, X5, X6, X7, X8, X9, X10]
     X_pred = np.array(X) 
-    X_pred = X_pred.reshape(10, 1)
-    assert X_pred.shape == (10, 1)
+    X_pred = X_pred.reshape(1, 10)
+    assert X_pred.shape == (1, 10)
     
     model = app.state.model
     
@@ -65,7 +65,7 @@ def predict(X1:float,
     
     
     return {
-        "BDI PREDICTION 1 WEEK INTO THE FUTRE": y_pred
+        "BDI PREDICTION 1 WEEK INTO THE FUTURE": y_pred
     }
 
 
