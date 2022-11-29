@@ -61,7 +61,6 @@ def predict(
     
     y_pred_log_diff = float(y_pred_log_diff[0][0])
     
-
     y_pred_log = y_pred_log_diff + X20_log
     
     #CONVERTING COMMON LOG y_pred_log to y_pred

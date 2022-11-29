@@ -83,7 +83,7 @@ def final_preprocess(df:pd.DataFrame) -> TimeseriesGenerator:
     
     predict_generator = prediction_preprocessing(prediction_df,  scaler_X)
     
-    X20 = prediction_df.iloc[20,2]
+    X20 = prediction_df.iloc[20,1]
     
     return (predict_generator, X20)
     
