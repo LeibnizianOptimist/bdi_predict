@@ -43,7 +43,7 @@ def predict(X1:float,
     X_pred = np.array(X) 
     X_pred = X_pred.reshape(1, 10)
     assert X_pred.shape == (1, 10)
-    
+    #Shape should be (1, 10, 2)
     model = app.state.model
     
     #The returned value of the model is the log difference between the previous input value and the next value (y_pred). We must utilise
