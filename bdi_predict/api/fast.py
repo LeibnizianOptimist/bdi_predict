@@ -61,7 +61,7 @@ def predict(X1:float,
     
     
     return {
-        "BDI PREDICTION 1 WEEK INTO THE FUTURE": y_pred
+        "BDI PREDICTION 1 DAY INTO THE FUTURE": y_pred
     }
 
 
