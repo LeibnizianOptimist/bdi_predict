@@ -10,3 +10,4 @@ training_outputs/
 .env.yaml
 .envrc
 api_data/
+streamlit_data/

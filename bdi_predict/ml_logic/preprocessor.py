@@ -75,7 +75,10 @@ def final_preprocess(df:pd.DataFrame) -> TimeseriesGenerator:
     
     #Actual running of the fuctions above:
     
+    
+    #Setting up prediction_df correctly: 
     prediction_df = pd.DataFrame(df.tail(21))
+
     
     Xy_train = train_test_split(df=df, train_test_ratio=0.8, input_length=len(df))
     
@@ -83,9 +86,10 @@ def final_preprocess(df:pd.DataFrame) -> TimeseriesGenerator:
     
     predict_generator = prediction_preprocessing(prediction_df,  scaler_X)
     
-    X20 = prediction_df.iloc[20,1]
+    X20 = prediction_df.iloc[20,2]
+    X20_abs = prediction_df.iloc[20, 1]
     
-    return (predict_generator, X20)
+    return (predict_generator, X20, X20_abs)
     
         
     

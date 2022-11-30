@@ -8,18 +8,22 @@ import os
 import yfinance as yf
 from plotly import graph_objs as go
 
+
+import datetime
+from datetime import date
+
+import requests
+
+
+from bdi_predict.ml_logic.params import BASE_PROJECT_PATH
+
 # - - - Title - - -
 st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 
 # - - - Header Section - - -
 with st.container():
-    st.subheader("Stock Market Data Analysis")
-    st.title("Predicting The Baltic Dry Index")
-
-
-import datetime
-from datetime import date
-
+    #st.subheader("Stock Market Data Analysis")
+    st.title("Baltic Dry Index Prediction Model")
 
 
 
@@ -27,6 +31,20 @@ from datetime import date
 window_selection_c = st.sidebar.container() # create an empty container in the sidebar
 window_selection_c.markdown("## Insights") # add a title to the sidebar container
 sub_columns = window_selection_c.columns(2) #Split the container into two columns for start and end date
+
+# ------ REQUESTING THE API ON GCLOUD RUN ---------------------------
+
+#currently the url only runs the local uvicorn instance.
+url = "http://127.0.0.1:8000/predict"
+response = requests.get(url).json()
+print(response)
+prediction = response["prediction"]
+print(prediction)
+prev_value = response["prev_value"]
+print(prev_value)
+
+#difference = prediction - prev_day 
+#change = difference/prev_day
 
 def show_delta(self):
         """
@@ -59,6 +77,7 @@ def nearest_business_day(DATE: datetime.date):
     if DATE.weekday() == 6:
         DATE = DATE + datetime.timedelta(days=1)
     return DATE
+
 # ----------Time window selection-----------------
 YESTERDAY=datetime.date.today()-datetime.timedelta(days=1)
 YESTERDAY = nearest_business_day(YESTERDAY) #Round to business day
@@ -75,15 +94,21 @@ END = nearest_business_day(END)
 
 # - - - Creating the Chart - - -
 # ---------------stock selection------------------
-STOCK = np.array([ "BDI", "CIP"])
-SYMB = window_selection_c.selectbox("select stock", STOCK)
+STOCK = np.array([ "BDI", "CIP - YoY", "Nickel - Global Price"])
+SYMB = window_selection_c.selectbox("select index", STOCK)
 
 
+#Features:
+BDI_path = os.path.join(BASE_PROJECT_PATH, "streamlit_data", "cleaned_weekly_BDI.csv")
+CIP_path = os.path.join(BASE_PROJECT_PATH, "streamlit_data", "cleaned_weekly_CIP.csv")
+NICKEL_path = os.path.join(BASE_PROJECT_PATH, "streamlit_data", "cleaned_important_features_data.csv")
 
 if SYMB=='BDI':
-    data=pd.read_csv("../raw_data/data/BDI/cleaned_weekly_BDI.csv")
-elif SYMB=='CIP':
-    data=pd.read_csv("../raw_data/data/CIP/weekly_cleaned_cip.csv")
+    data=pd.read_csv(BDI_path)
+elif SYMB=='CIP - YoY':
+    data=pd.read_csv(CIP_path)
+elif SYMB=="Nickel - Global Price":
+    data=pd.read_csv(NICKEL_path)
 
 
 
