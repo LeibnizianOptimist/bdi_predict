@@ -1,0 +1,36 @@
+# packaging
+pip>=9
+setuptools>=26
+twine
+wheel>=0.29
+
+# data science
+numpy
+pandas
+scikit-learn
+tensorflow
+
+# tests/linter
+black
+coverage
+flake8
+yapf
+
+# API
+gcsfs
+google-cloud-storage
+mlflow
+s3fs
+
+fastapi        
+uvicorn 
+
+streamlit
+yfinance
+plotly
+
+# utilities
+six>=1.14
+joblib
+memoized-property
+termcolor
