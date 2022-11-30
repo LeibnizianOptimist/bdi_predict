@@ -2,12 +2,15 @@
 import os
 import time
 import pickle
-from tensorflow.keras import Model, models
+import pandas as pd
+from tensorflow import keras 
+from keras import Model, models
 import glob
 import mlflow
 
 
-from bdi_predict.ml_logic.params import LOCAL_REGISTRY_PATH
+
+from bdi_predict.ml_logic.params import LOCAL_REGISTRY_PATH, API_DATA_PATH
 
 
 def save_model(model: Model = None,
@@ -108,3 +111,21 @@ def load_model(save_copy_locally=False) -> Model:
     print("\nModel loaded from disk")
 
     return model
+
+
+def load_data() -> pd.DataFrame:
+    """ 
+    Loads the necessary data for the model to make a prediction for the API.
+    """
+    
+    print("\nLoading data from local disk...")
+    
+    # Getting data with relative registry path:
+    
+    data_directory = API_DATA_PATH
+    df = pd.read_csv(f"{data_directory}/cip_model_data.csv")
+
+    return df
+    
+    
+    
