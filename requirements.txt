@@ -30,6 +30,10 @@ fastapi
 pytz           
 uvicorn 
 
+streamlit
+yfinance
+plotly
+
 # utilities
 six>=1.14
 joblib

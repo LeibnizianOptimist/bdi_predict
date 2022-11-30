@@ -37,8 +37,8 @@ def predict(
     
     #Taking in data & model 
     df = app.state.data
-    df["Date"] = pd.to_datetime(df["Date"])
-    df.set_index("Date", inplace=True)
+    #df["Date"] = pd.to_datetime(df["Date"])
+    #df.set_index("Date", inplace=False)
     
     model = app.state.model
     
@@ -53,7 +53,10 @@ def predict(
     
     X20_log = output[1]
     assert type(X20_log) == np.float64
-     
+    
+    X20_abs = output[2]
+    assert type(X20_abs) == np.float64
+    
     #Make prediction
     y_pred_log_diff = model.predict(predict_generator)
     assert type(y_pred_log_diff) == np.ndarray
@@ -68,7 +71,8 @@ def predict(
     y_pred = float(y_pred)
 
     return {
-        "BDI PREDICTION 1 DAY INTO THE FUTURE": y_pred
+        "prediction": y_pred, 
+        "prev_value": X20_abs
     }
 
 
