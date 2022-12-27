@@ -10,7 +10,7 @@ import mlflow
 
 
 
-from bdi_predict.ml_logic.params import LOCAL_REGISTRY_PATH, API_DATA_PATH
+from bdi_predict_old.ml_logic.params import LOCAL_REGISTRY_PATH, API_DATA_PATH
 
 
 def save_model(model: Model = None,

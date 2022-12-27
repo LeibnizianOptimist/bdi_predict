@@ -6,9 +6,9 @@ import numpy as np
 from keras.preprocessing.sequence import TimeseriesGenerator
 from sklearn.preprocessing import MinMaxScaler
 
-from bdi_predict.ml_logic.registry import load_model, load_data
-from bdi_predict.ml_logic.params import LOCAL_REGISTRY_PATH
-from bdi_predict.ml_logic.preprocessor import final_preprocess
+from bdi_predict_old.ml_logic.registry import load_model, load_data
+from bdi_predict_old.ml_logic.params import LOCAL_REGISTRY_PATH
+from bdi_predict_old.ml_logic.preprocessor import final_preprocess
 
 
 app = FastAPI()
